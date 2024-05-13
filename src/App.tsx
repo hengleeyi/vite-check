@@ -1,5 +1,6 @@
 import res from "./mock/res.js";
 import { createNestedCategories } from "./lib/utils.js";
+import Tree from "./components/Tree.js";
 
 function App() {
   console.log(res);
@@ -9,7 +10,12 @@ function App() {
 
   return (
     <>
-      <div className="text-3xl m-auto w-10/12">App</div>
+      <div className="m-auto w-10/12">
+        <div>App</div>
+        <div className="h-80 overflow-y-auto">
+          <Tree data={nestedCategories} isRoot />
+        </div>
+      </div>
     </>
   );
 }
