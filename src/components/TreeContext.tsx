@@ -5,6 +5,7 @@ import {
   CategoryState,
   createNestedCategories,
 } from "../lib/utils";
+import TreeSelectedCategories from "./TreeSelectedCategories";
 
 type UpdateCallback = (oldState: CategoryState[]) => CategoryState[];
 
@@ -17,6 +18,8 @@ type TreeContextType = {
   selectAll: boolean;
   setShowAll: (newVal: boolean) => void;
   showAll: boolean;
+  setSelectedCategories: (newVal: Category[]) => void;
+  selectedCategories: Category[];
 };
 
 const TreeContext = createContext<TreeContextType | undefined>(undefined);
@@ -30,6 +33,7 @@ const TreeProvider = ({
 }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
   const initialCategoriesState = defaultVal.map((category) => ({
     ...category,
     checked: false,
@@ -54,10 +58,13 @@ const TreeProvider = ({
         setSelectAll,
         showAll,
         setShowAll,
+        selectedCategories,
+        setSelectedCategories,
       }}
     >
-      <div className="border-2 border-slate-300 rounded-lg overflow-y-auto h-96">
-        {children}
+      <div className="border-2 border-slate-300 rounded-lg ">
+        <div className="overflow-y-auto h-96">{children}</div>
+        <TreeSelectedCategories />
       </div>
     </TreeContext.Provider>
   );

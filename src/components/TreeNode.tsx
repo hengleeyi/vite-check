@@ -9,7 +9,13 @@ type TreeNodeProps = {
 };
 
 const TreeNode = ({ node, isRoot }: TreeNodeProps) => {
-  const { categoriesState, categoryMap, setCategoriesState } = useTree();
+  const {
+    categoriesState,
+    categoryMap,
+    setCategoriesState,
+    selectedCategories,
+    setSelectedCategories,
+  } = useTree();
   const hasChildren = node.children.length > 0;
   const id = node.id;
   const currentState = categoriesState.find((category) => {
@@ -24,25 +30,66 @@ const TreeNode = ({ node, isRoot }: TreeNodeProps) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const check = e.target.checked;
+
+    const willUpdateSelectedCategories = [...selectedCategories];
     const checkChildren = (targetId: string) => {
       // has children
       if (categoryMap[targetId]) {
         for (const child of categoryMap[targetId]) {
-          // connectedChildren.push(child);
-
           const stateIndex = categoriesState.findIndex((categoryState) => {
             return categoryState.id === child.id;
           });
 
           categoriesState[stateIndex].checked = check;
+
+          // sync with display tags
+          const foundCategoryIndex = willUpdateSelectedCategories.findIndex(
+            (category) => category.id === child.id
+          );
+          if (check && foundCategoryIndex < 0) {
+            willUpdateSelectedCategories.push(child);
+          }
+
+          if (!check) {
+            const cIndex = willUpdateSelectedCategories.findIndex(
+              (category) => category.id === child.id
+            );
+            willUpdateSelectedCategories.splice(cIndex, 1);
+          }
+
           checkChildren(child.id);
         }
       }
     };
 
     categoriesState[stateIndex].checked = check;
+
     checkChildren(id);
+
     setCategoriesState([...categoriesState]);
+
+    const selectIndex = willUpdateSelectedCategories.findIndex(
+      (category) => category.id === id
+    );
+    if (check && selectIndex < 0) {
+      const newSelect = {
+        id: node.id,
+        name: node.name,
+        parent: node.parent,
+        children: [],
+      };
+
+      willUpdateSelectedCategories.push(newSelect);
+    }
+
+    if (!check) {
+      const sIndex = willUpdateSelectedCategories.findIndex(
+        (category) => category.id === id
+      );
+      willUpdateSelectedCategories.splice(sIndex, 1);
+    }
+
+    setSelectedCategories(willUpdateSelectedCategories);
   };
 
   const handleClickTitle = () => {
