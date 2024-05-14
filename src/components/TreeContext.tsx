@@ -18,8 +18,8 @@ type TreeContextType = {
   selectAll: boolean;
   setShowAll: (newVal: boolean) => void;
   showAll: boolean;
-  setSelectedCategories: (newVal: Category[]) => void;
-  selectedCategories: Category[];
+  setSelectedCategories: (newVal: CategoryRaw[]) => void;
+  selectedCategories: CategoryRaw[];
 };
 
 const TreeContext = createContext<TreeContextType | undefined>(undefined);
@@ -33,7 +33,7 @@ const TreeProvider = ({
 }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [showAll, setShowAll] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<CategoryRaw[]>([]);
   const initialCategoriesState = defaultVal.map((category) => ({
     ...category,
     checked: false,

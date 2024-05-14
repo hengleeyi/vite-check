@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Category } from "../lib/utils";
+import { Category, CategoryRaw } from "../lib/utils";
 import Tree from "./Tree";
 import { useTree } from "./TreeContext";
 
@@ -13,7 +13,6 @@ const TreeNode = ({ node, isRoot }: TreeNodeProps) => {
     categoriesState,
     categoryMap,
     setCategoriesState,
-    selectedCategories,
     setSelectedCategories,
   } = useTree();
   const hasChildren = node.children.length > 0;
@@ -30,8 +29,6 @@ const TreeNode = ({ node, isRoot }: TreeNodeProps) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const check = e.target.checked;
-
-    const willUpdateSelectedCategories = [...selectedCategories];
     const checkChildren = (targetId: string) => {
       // has children
       if (categoryMap[targetId]) {
@@ -41,22 +38,6 @@ const TreeNode = ({ node, isRoot }: TreeNodeProps) => {
           });
 
           categoriesState[stateIndex].checked = check;
-
-          // sync with display tags
-          const foundCategoryIndex = willUpdateSelectedCategories.findIndex(
-            (category) => category.id === child.id
-          );
-          if (check && foundCategoryIndex < 0) {
-            willUpdateSelectedCategories.push(child);
-          }
-
-          if (!check) {
-            const cIndex = willUpdateSelectedCategories.findIndex(
-              (category) => category.id === child.id
-            );
-            willUpdateSelectedCategories.splice(cIndex, 1);
-          }
-
           checkChildren(child.id);
         }
       }
@@ -68,28 +49,17 @@ const TreeNode = ({ node, isRoot }: TreeNodeProps) => {
 
     setCategoriesState([...categoriesState]);
 
-    const selectIndex = willUpdateSelectedCategories.findIndex(
-      (category) => category.id === id
-    );
-    if (check && selectIndex < 0) {
-      const newSelect = {
-        id: node.id,
-        name: node.name,
-        parent: node.parent,
-        children: [],
-      };
+    const newSelectedCategories: CategoryRaw[] = categoriesState
+      .filter((category) => {
+        return category.checked;
+      })
+      .map((c) => ({
+        id: c.id,
+        name: c.name,
+        parent: c.parent,
+      }));
 
-      willUpdateSelectedCategories.push(newSelect);
-    }
-
-    if (!check) {
-      const sIndex = willUpdateSelectedCategories.findIndex(
-        (category) => category.id === id
-      );
-      willUpdateSelectedCategories.splice(sIndex, 1);
-    }
-
-    setSelectedCategories(willUpdateSelectedCategories);
+    setSelectedCategories(newSelectedCategories);
   };
 
   const handleClickTitle = () => {
