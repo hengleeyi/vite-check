@@ -6,11 +6,15 @@ import {
   createNestedCategories,
 } from "../lib/utils";
 
+type UpdateCallback = (oldState: CategoryState[]) => CategoryState[];
+
 type TreeContextType = {
   categoriesState: CategoryState[];
-  setCategoriesState: (newVal: CategoryState[]) => void;
+  setCategoriesState: ((newVal: CategoryState[]) => void) | UpdateCallback;
   defaultNestedCategories: Category[];
   categoryMap: Record<string, Category[]>;
+  setSelectAll: (newVal: boolean) => void;
+  selectAll: boolean;
 };
 
 const TreeContext = createContext<TreeContextType | undefined>(undefined);
@@ -22,6 +26,7 @@ const TreeProvider = ({
   children: React.ReactNode;
   defaultVal: CategoryRaw[];
 }) => {
+  const [selectAll, setSelectAll] = useState(false);
   const initialCategoriesState = defaultVal.map((category) => ({
     ...category,
     checked: false,
@@ -42,6 +47,8 @@ const TreeProvider = ({
         setCategoriesState,
         defaultNestedCategories,
         categoryMap,
+        selectAll,
+        setSelectAll
       }}
     >
       {children}
