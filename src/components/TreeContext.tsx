@@ -56,7 +56,9 @@ const TreeProvider = ({
         setShowAll,
       }}
     >
-      <div className="border border-slate-300 rounded-lg">{children}</div>
+      <div className="border-2 border-slate-300 rounded-lg overflow-y-auto h-96">
+        {children}
+      </div>
     </TreeContext.Provider>
   );
 };
