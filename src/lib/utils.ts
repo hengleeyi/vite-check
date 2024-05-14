@@ -1,7 +1,8 @@
 import res from "../mock/res";
 
-type CategoryRaw = (typeof res.data.categories)[number];
+export type CategoryRaw = (typeof res.data.categories)[number];
 export type Category = CategoryRaw & { children: Category[] };
+export type CategoryState = CategoryRaw & { checked: boolean };
 
 export const createNestedCategories = (arr: CategoryRaw[]) => {
   // create a map of parent to children, parent key can find children
@@ -59,5 +60,5 @@ export const createNestedCategories = (arr: CategoryRaw[]) => {
     return buildNode(rootCategory);
   });
 
-  return result;
+  return { result, categoryMap };
 };

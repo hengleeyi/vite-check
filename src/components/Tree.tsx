@@ -1,16 +1,19 @@
 import { Category } from "../lib/utils";
-import CheckboxNode from "./CheckboxNode";
+import TreeNode from "./TreeNode";
+import { useTree } from "./TreeContext";
 
 type TreeProps = {
-  data: Category[];
+  data?: Category[];
   isRoot?: boolean;
 };
 
-const Tree = ({ data, isRoot }: TreeProps) => {
+const Tree = ({ isRoot, data }: TreeProps) => {
+  const { defaultNestedCategories } = useTree();
+  const nestedCategories = data || defaultNestedCategories;
   return (
     <>
-      {data.map((node) => {
-        return <CheckboxNode key={node.id} node={node} isRoot={isRoot}/>;
+      {nestedCategories.map((node) => {
+        return <TreeNode key={node.id} node={node} isRoot={isRoot} />;
       })}
     </>
   );
