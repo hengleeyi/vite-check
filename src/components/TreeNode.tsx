@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { Category } from "../lib/utils";
 import Tree from "./Tree";
 import { useTree } from "./TreeContext";
-import { useState } from "react";
 
 type TreeNodeProps = {
   node: Category;
@@ -11,17 +10,19 @@ type TreeNodeProps = {
 
 const TreeNode = ({ node, isRoot }: TreeNodeProps) => {
   const { categoriesState, categoryMap, setCategoriesState } = useTree();
-  const [showChildren, setShowChildren] = useState(false);
   const hasChildren = node.children.length > 0;
-
+  const id = node.id;
   const currentState = categoriesState.find((category) => {
     return category.id === node.id;
   });
+  const stateIndex = categoriesState.findIndex((categoryState) => {
+    return categoryState.id === id;
+  });
 
   const isChecked = currentState?.checked;
+  const showChildren = currentState?.showChildren;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const id = node.id;
     const check = e.target.checked;
     const checkChildren = (targetId: string) => {
       // has children
@@ -39,16 +40,19 @@ const TreeNode = ({ node, isRoot }: TreeNodeProps) => {
       }
     };
 
-    const clickStateIndex = categoriesState.findIndex((categoryState) => {
-      return categoryState.id === id;
-    });
-
-    categoriesState[clickStateIndex].checked = check;
-
+    categoriesState[stateIndex].checked = check;
     checkChildren(id);
-
     setCategoriesState([...categoriesState]);
   };
+
+  const handleClickTitle = () => {
+    if (hasChildren) {
+      categoriesState[stateIndex].showChildren =
+        !categoriesState[stateIndex].showChildren;
+      setCategoriesState([...categoriesState]);
+    }
+  };
+
   return (
     <div className={clsx(!isRoot && "ml-6")}>
       <div className="ml-6 my-2 flex items-center">
@@ -60,7 +64,7 @@ const TreeNode = ({ node, isRoot }: TreeNodeProps) => {
         />
         <div
           className={clsx("ml-2", hasChildren && "font-bold cursor-pointer")}
-          onClick={() => setShowChildren(!showChildren)}
+          onClick={handleClickTitle}
         >
           {node.name}
         </div>

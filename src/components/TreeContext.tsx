@@ -25,6 +25,7 @@ const TreeProvider = ({
   const initialCategoriesState = defaultVal.map((category) => ({
     ...category,
     checked: false,
+    showChildren: false,
   }));
 
   const [categoriesState, setCategoriesState] = useState<CategoryState[]>(
