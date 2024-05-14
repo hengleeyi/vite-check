@@ -1,3 +1,4 @@
+import { CategoryRaw } from "../lib/utils";
 import { useTree } from "./TreeContext";
 
 const TreeToolbar = () => {
@@ -8,6 +9,7 @@ const TreeToolbar = () => {
     setSelectAll,
     showAll,
     setShowAll,
+    setSelectedCategories,
   } = useTree();
 
   const handleSelectAll = () => {
@@ -16,6 +18,19 @@ const TreeToolbar = () => {
     });
     setCategoriesState(newState);
     setSelectAll(!selectAll);
+
+    // Update displying selected categories
+    const newSelectedCategories: CategoryRaw[] = newState
+      .filter((category) => {
+        return category.checked;
+      })
+      .map((c) => ({
+        id: c.id,
+        name: c.name,
+        parent: c.parent,
+      }));
+
+    setSelectedCategories(newSelectedCategories);
   };
 
   const handleShowAll = () => {
@@ -27,7 +42,7 @@ const TreeToolbar = () => {
   };
 
   return (
-    <div className="border-b border-slate-300 px-6 py-6 flex gap-4 sticky top-0 bg-white flex-col md:flex-row md:py-2 text-sm">
+    <div className="border-b border-slate-300 px-6 py-6 flex gap-4 sticky top-0 bg-white flex-col md:flex-row md:py-2 text-sm rounded-tl-lg rounded-tr-lg">
       <div
         className="flex items-center cursor-pointer bg-slate-700 p-1 px-3 rounded-full text-white"
         onClick={handleSelectAll}

@@ -33,8 +33,20 @@ const TreeProvider = ({
 }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [showAll, setShowAll] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState<CategoryRaw[]>([]);
-  const initialCategoriesState = defaultVal.map((category) => ({
+  const [selectedCategories, setSelectedCategories] = useState<CategoryRaw[]>(
+    []
+  );
+
+  const ids = new Set(defaultVal.map((category) => category.id));
+  // remove element that parent id is not in the mock
+  const validDefaultVal = defaultVal.filter((category) => {
+    const IsParentExist = category.parent === "0" || ids.has(category.parent);
+    return IsParentExist;
+  });
+
+  const { result: defaultNestedCategories, categoryMap } =
+    createNestedCategories(validDefaultVal);
+  const initialCategoriesState = validDefaultVal.map((category) => ({
     ...category,
     checked: false,
     showChildren: false,
@@ -43,9 +55,6 @@ const TreeProvider = ({
   const [categoriesState, setCategoriesState] = useState<CategoryState[]>(
     initialCategoriesState
   );
-
-  const { result: defaultNestedCategories, categoryMap } =
-    createNestedCategories(defaultVal);
 
   return (
     <TreeContext.Provider

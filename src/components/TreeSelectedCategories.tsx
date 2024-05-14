@@ -4,6 +4,8 @@ import { useTree } from "./TreeContext";
 const TreeSelectedCategories = () => {
   const { selectedCategories } = useTree();
 
+  if (selectedCategories.length === 0) return null;
+
   return (
     <div className="px-6 py-2 border-t border-slate-300 flex flex-wrap gap-2">
       {selectedCategories.map((selectedCategory) => {
