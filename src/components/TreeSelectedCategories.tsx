@@ -7,7 +7,7 @@ const TreeSelectedCategories = () => {
   if (selectedCategories.length === 0) return null;
 
   return (
-    <div className="px-6 py-2 border-t border-slate-300 flex flex-wrap gap-2">
+    <div className="px-6 py-2 border-t border-slate-200 flex flex-wrap gap-2">
       {selectedCategories.map((selectedCategory) => {
         return (
           <div

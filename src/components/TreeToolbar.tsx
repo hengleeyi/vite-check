@@ -42,7 +42,7 @@ const TreeToolbar = () => {
   };
 
   return (
-    <div className="border-b border-slate-300 px-6 py-6 flex gap-4 sticky top-0 bg-white flex-col md:flex-row md:py-2 text-sm rounded-tl-lg rounded-tr-lg">
+    <div className="border-b border-slate-200 px-6 py-6 flex gap-4 sticky top-0 bg-white flex-col md:flex-row md:py-2 text-sm rounded-tl-lg rounded-tr-lg">
       <div
         className="flex items-center cursor-pointer bg-slate-700 p-1 px-3 rounded-full text-white"
         onClick={handleSelectAll}

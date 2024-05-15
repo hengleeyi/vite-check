@@ -71,7 +71,7 @@ const TreeProvider = ({
         setSelectedCategories,
       }}
     >
-      <div className="border-2 border-slate-300 rounded-lg ">
+      <div className="border border-slate-200 rounded-lg ">
         <div className="overflow-y-auto h-96">{children}</div>
         <TreeSelectedCategories />
       </div>
