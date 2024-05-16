@@ -15,6 +15,7 @@ const TreeSelectedCategories = () => {
               "p-2 rounded-lg text-white text-sm",
               selectedCategory.parent === "0" ? "bg-teal-700" : "bg-slate-600"
             )}
+            key={selectedCategory.id}
           >
             {selectedCategory.name}
           </div>

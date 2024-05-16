@@ -83,7 +83,7 @@ const useTree = () => {
   const context = useContext(TreeContext);
 
   if (context === undefined) {
-    throw new Error("Please use <TreeProvider /> to wrap <Tree /> ");
+    throw new Error("Please use <TreeProvider /> to wrap <Tree />");
   }
 
   return context;
