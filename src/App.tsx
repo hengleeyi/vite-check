@@ -1,5 +1,5 @@
 import res from "./mock/res.js";
-import CategoryTree from "./components/CategoryTree.js";
+import CheckboxTree from "./components/CheckboxTree";
 
 function App() {
   const mockCategories = res.data.categories;
@@ -7,9 +7,9 @@ function App() {
   return (
     <>
       <div className="m-auto w-10/12 flex flex-col items-center">
-        <h1 className="text-3xl p-6">Tree component</h1>
+        <h1 className="text-3xl p-6">Vite Checkbox Tree 🌳</h1>
         <div className="overflow-y-auto w-full">
-          <CategoryTree defaultVal={mockCategories} />
+          <CheckboxTree defaultVal={mockCategories} />
         </div>
       </div>
     </>

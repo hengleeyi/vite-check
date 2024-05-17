@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
-import CategoryTree from "./CategoryTree";
+import CheckboxTree from "./CheckboxTree";
 
-describe("CategoryTree", () => {
+describe("CheckboxTree", () => {
   const defaultData = [
     { id: "1", parent: "0", name: "Men" },
     { id: "2", parent: "0", name: "Women" },
@@ -10,7 +10,7 @@ describe("CategoryTree", () => {
   ];
 
   test("renders TreeToolbar and Tree components", () => {
-    render(<CategoryTree defaultVal={defaultData} />);
+    render(<CheckboxTree defaultVal={defaultData} />);
 
     const treeToolbar = screen.getByTestId("tree-toolbar");
     const tree = screen.getByTestId("tree");

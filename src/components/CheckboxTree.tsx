@@ -3,13 +3,13 @@ import Tree from "./Tree";
 import { TreeProvider } from "./TreeContext";
 import TreeToolbar from "./TreeToolbar";
 
-const CategoryTree = ({ defaultVal }: { defaultVal: CategoryRaw[] }) => {
+const CheckboxTree = ({ defaultVal }: { defaultVal: CategoryRaw[] }) => {
   return (
     <TreeProvider defaultVal={defaultVal}>
-      <TreeToolbar/>
+      <TreeToolbar />
       <Tree isRoot />
     </TreeProvider>
   );
 };
 
-export default CategoryTree;
+export default CheckboxTree;

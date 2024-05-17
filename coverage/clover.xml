@@ -42,7 +42,7 @@
     </package>
     <package name="src.components">
       <metrics statements="316" coveredstatements="316" conditionals="43" coveredconditionals="43" methods="12" coveredmethods="12"/>
-      <file name="CategoryTree.tsx" path="/Users/yhlee/workspace/vite/vite-check/src/components/CategoryTree.tsx">
+      <file name="CheckboxTree.tsx" path="/Users/yhlee/workspace/vite/vite-check/src/components/CheckboxTree.tsx">
         <metrics statements="15" coveredstatements="15" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>

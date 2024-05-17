@@ -1,30 +1,43 @@
-# React + TypeScript + Vite
+# Vite Checkbox Tree 🌳
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Vite Checkbox Tree is a faceted checkbox tree component built with React. It allows users to view and interact with a hierarchical structure of nested categories. By clicking on category titles, users can expand or collapse related subcategories.
 
-Currently, two official plugins are available:
+The toolbar offers convenient functions for interacting with all categories. The first button is for selecting or deselecting all categories. Toggling this button will instantly check or uncheck all checkboxes. The second button shows or hides all subcategories, making it easy to expand or collapse the entire tree and quickly get an overview of each level.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The bottom section displays the currently selected categories, always syncing with the checkboxes in the tree. This feature helps users understand their current selection and decide on further actions with ease.
 
-## Expanding the ESLint configuration
+## Preview
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+[![Preview](https://github.com/hengleeyi/vite-check/blob/main/preview.png?raw=true)](http://github.com/hengleeyi/fredex/)
 
-- Configure the top-level `parserOptions` property like this:
+## Website
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+https://vite-check-six.vercel.app/
+
+## Stacks
+- React 18.2
+- Typescript 5.2
+- Vite
+- Vitest
+
+## Installing Dependencies
+
+```bash
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Running the Development Server
+
+```bash
+npm run dev
+```
+
+## Running Test
+```bash
+npm run test
+```
+
+## Running Test Coverage
+```bash
+npm run coverage
+```
