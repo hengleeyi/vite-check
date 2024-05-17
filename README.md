@@ -15,13 +15,17 @@ The bottom section displays the currently selected categories, always syncing wi
 ## Quick Usage
 
 ```Typescript
-const data = [
-    { id: "1", parent: "0", name: "Men" },
-    { id: "2", parent: "0", name: "Women" },
-    { id: "3", parent: "1", name: "Shirt" },
-];
 
-<CheckboxTree defaultVal={data} />
+
+function App() {
+    const data = [
+        { id: "1", parent: "0", name: "Men" },
+        { id: "2", parent: "0", name: "Women" },
+        { id: "3", parent: "1", name: "Shirt" },
+    ];
+    
+    return <CheckboxTree defaultVal={data} />
+}
 ```
 
 ## Website
