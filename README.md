@@ -17,6 +17,7 @@ https://vite-check-six.vercel.app/
 ## Stacks
 - React 18.2
 - Typescript 5.2
+- Tailwind CSS
 - Vite
 - Vitest
 
