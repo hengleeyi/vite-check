@@ -10,6 +10,20 @@ The bottom section displays the currently selected categories, always syncing wi
 
 [![Preview](https://github.com/hengleeyi/vite-check/blob/main/preview.png?raw=true)](http://github.com/hengleeyi/fredex/)
 
+
+
+## Quick Usage
+
+```Typescript
+const data = [
+    { id: "1", parent: "0", name: "Men" },
+    { id: "2", parent: "0", name: "Women" },
+    { id: "3", parent: "1", name: "Shirt" },
+];
+
+<CheckboxTree defaultVal={data} />
+```
+
 ## Website
 
 https://vite-check-six.vercel.app/
