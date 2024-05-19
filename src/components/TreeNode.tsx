@@ -20,30 +20,33 @@ const TreeNode = ({ node, isRoot }: TreeNodeProps) => {
   const currentState = categoriesState.find((category) => {
     return category.id === node.id;
   });
-  const stateIndex = categoriesState.findIndex((categoryState) => {
-    return categoryState.id === id;
-  });
 
-  const isChecked = currentState?.checked;
-  const showChildren = currentState?.showChildren;
+  if (!currentState) return null;
+
+  const isChecked = currentState.checked;
+  const showChildren = currentState.showChildren;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const check = e.target.checked;
     const checkChildren = (targetId: string) => {
-      // has children
+      // node has children
       if (categoryMap[targetId]) {
         for (const child of categoryMap[targetId]) {
-          const stateIndex = categoriesState.findIndex((categoryState) => {
+          // sync each child check state in categoryState
+          const categoryState = categoriesState.find((categoryState) => {
             return categoryState.id === child.id;
           });
 
-          categoriesState[stateIndex].checked = check;
+          if (categoryState) {
+            categoryState.checked = check;
+          }
+          // check children of this child recursively
           checkChildren(child.id);
         }
       }
     };
 
-    categoriesState[stateIndex].checked = check;
+    currentState.checked = check;
 
     checkChildren(id);
 
@@ -64,8 +67,7 @@ const TreeNode = ({ node, isRoot }: TreeNodeProps) => {
 
   const handleClickTitle = () => {
     if (hasChildren) {
-      categoriesState[stateIndex].showChildren =
-        !categoriesState[stateIndex].showChildren;
+      currentState.showChildren = !currentState.showChildren;
       setCategoriesState([...categoriesState]);
     }
   };

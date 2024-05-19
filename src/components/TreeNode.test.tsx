@@ -50,6 +50,23 @@ describe("TreeNode", () => {
     expect(screen.getByTestId("tree")).toBeVisible();
   });
 
+  test("should render null wehn categoriesState cannot find node ", () => {
+    const node = {
+      id: "10",
+      parent: "0",
+      name: "Kids",
+      children: [{ id: "12", parent: "10", name: "Shirt", children: [] }],
+    };
+
+    render(
+      <TreeProvider defaultVal={defaultData}>
+        <TreeNode node={node} />
+      </TreeProvider>
+    );
+
+    expect(screen.queryByText("Kids")).toBeFalsy();
+  });
+
   test("should update checked state of children when parent checkbox is clicked", () => {
     const node = {
       id: "1",
