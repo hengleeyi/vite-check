@@ -8,7 +8,7 @@ The bottom section displays the currently selected categories, always syncing wi
 
 ## Preview
 
-[![Preview](https://github.com/hengleeyi/vite-check/blob/main/preview.png?raw=true)](http://github.com/hengleeyi/fredex/)
+[![Preview](https://github.com/hengleeyi/vite-check/blob/main/preview.png?raw=true)](http://github.com/hengleeyi/vite-check/)
 
 
 
