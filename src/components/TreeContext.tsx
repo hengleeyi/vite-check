@@ -14,10 +14,10 @@ type TreeContextType = {
   setCategoriesState: ((newVal: CategoryState[]) => void) | UpdateCallback;
   defaultNestedCategories: Category[];
   categoryMap: Record<string, Category[]>;
-  setSelectAll: (newVal: boolean) => void;
+  handleSelectAll: () => void;
+  handleShowAll: () => void;
   selectAll: boolean;
-  setShowAll: (newVal: boolean) => void;
-  showAll: boolean;
+  showAll: boolean
 };
 
 const TreeContext = createContext<TreeContextType | undefined>(undefined);
@@ -51,6 +51,22 @@ const TreeProvider = ({
     initialCategoriesState
   );
 
+  const handleSelectAll = () => {
+    const newState = categoriesState.map((category) => {
+      return { ...category, checked: !selectAll };
+    });
+    setCategoriesState(newState);
+    setSelectAll(!selectAll);
+  };
+
+  const handleShowAll = () => {
+    const newState = categoriesState.map((category) => {
+      return { ...category, showChildren: !showAll };
+    });
+    setCategoriesState(newState);
+    setShowAll(!showAll);
+  };
+
   return (
     <TreeContext.Provider
       value={{
@@ -58,10 +74,10 @@ const TreeProvider = ({
         setCategoriesState,
         defaultNestedCategories,
         categoryMap,
+        handleSelectAll,
+        handleShowAll,
         selectAll,
-        setSelectAll,
-        showAll,
-        setShowAll,
+        showAll
       }}
     >
       <div className="border border-slate-200 rounded-lg ">
