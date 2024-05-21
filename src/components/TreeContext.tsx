@@ -18,8 +18,6 @@ type TreeContextType = {
   selectAll: boolean;
   setShowAll: (newVal: boolean) => void;
   showAll: boolean;
-  setSelectedCategories: (newVal: CategoryRaw[]) => void;
-  selectedCategories: CategoryRaw[];
 };
 
 const TreeContext = createContext<TreeContextType | undefined>(undefined);
@@ -33,9 +31,6 @@ const TreeProvider = ({
 }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [showAll, setShowAll] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState<CategoryRaw[]>(
-    []
-  );
 
   const ids = new Set(defaultVal.map((category) => category.id));
   // remove element that parent id is not in the mock
@@ -67,8 +62,6 @@ const TreeProvider = ({
         setSelectAll,
         showAll,
         setShowAll,
-        selectedCategories,
-        setSelectedCategories,
       }}
     >
       <div className="border border-slate-200 rounded-lg ">

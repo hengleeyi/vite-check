@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Category, CategoryRaw } from "../lib/utils";
+import { Category } from "../lib/utils";
 import Tree from "./Tree";
 import { useTree } from "./TreeContext";
 
@@ -13,7 +13,6 @@ const TreeNode = ({ node, isRoot }: TreeNodeProps) => {
     categoriesState,
     categoryMap,
     setCategoriesState,
-    setSelectedCategories,
   } = useTree();
   const hasChildren = node.children.length > 0;
   const id = node.id;
@@ -51,18 +50,6 @@ const TreeNode = ({ node, isRoot }: TreeNodeProps) => {
     checkChildren(id);
 
     setCategoriesState([...categoriesState]);
-
-    const newSelectedCategories: CategoryRaw[] = categoriesState
-      .filter((category) => {
-        return category.checked;
-      })
-      .map((c) => ({
-        id: c.id,
-        name: c.name,
-        parent: c.parent,
-      }));
-
-    setSelectedCategories(newSelectedCategories);
   };
 
   const handleClickTitle = () => {

@@ -1,4 +1,3 @@
-import { CategoryRaw } from "../lib/utils";
 import { useTree } from "./TreeContext";
 
 const TreeToolbar = () => {
@@ -9,7 +8,6 @@ const TreeToolbar = () => {
     setSelectAll,
     showAll,
     setShowAll,
-    setSelectedCategories,
   } = useTree();
 
   const handleSelectAll = () => {
@@ -18,19 +16,6 @@ const TreeToolbar = () => {
     });
     setCategoriesState(newState);
     setSelectAll(!selectAll);
-
-    // Update displying selected categories
-    const newSelectedCategories: CategoryRaw[] = newState
-      .filter((category) => {
-        return category.checked;
-      })
-      .map((c) => ({
-        id: c.id,
-        name: c.name,
-        parent: c.parent,
-      }));
-
-    setSelectedCategories(newSelectedCategories);
   };
 
   const handleShowAll = () => {

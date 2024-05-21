@@ -1,9 +1,20 @@
 import clsx from "clsx";
 import { useTree } from "./TreeContext";
+import { CategoryRaw } from "../lib/utils";
 
 const TreeSelectedCategories = () => {
-  const { selectedCategories } = useTree();
+  const { categoriesState } = useTree();
 
+  const selectedCategories: CategoryRaw[] = categoriesState
+    .filter((category) => {
+      return category.checked;
+    })
+    .map((c) => ({
+      id: c.id,
+      name: c.name,
+      parent: c.parent,
+    }));
+ 
   if (selectedCategories.length === 0) return null;
 
   return (
